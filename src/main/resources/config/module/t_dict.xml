@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dict">
+
+
+    <select id="dict.selectCount" parameterType="com.enterprise.entity.Dict"
+            resultType="int">
+        select * from t_dict where 1=1
+        <if test="dictKey!=null and dictKey!=''">
+            and dict_key=#{dictKey}
+        </if>
+        <if test="rootKey!=null and rootKey!=''">
+            and root_key=#{rootKey}
+        </if>
+    </select>
+    <select id="dict.selectByCondition" parameterType="com.enterprise.entity.Dict"
+            resultType="com.enterprise.entity.Dict">
+        select * from t_dict where 1=1
+        <if test="dictKey!=null and dictKey!=''">
+            and dict_key=#{dictKey}
+        </if>
+        <if test="rootKey!=null and rootKey!=''">
+            and root_key=#{rootKey}
+        </if>
+        <if test="parentKey!=null and parentKey!=''">
+            and parent_key=#{parentKey}
+        </if>
+
+    </select>
+    <insert id="dict.insert" parameterType="com.enterprise.entity.Dict"
+            useGeneratedKeys="true" keyProperty="id">
+        insert into t_dict
+        (id,dict_key,dict_value,parent_key,root_key)
+        values
+        (id,#{dictKey},#{dictValue},#{parentKey},#{rootKey})
+    </insert>
+    <update id="dict.update" parameterType="com.enterprise.entity.Dict">
+        update t_dict set
+        id=#{id}
+        <if test="dictKey!=null and dictKey !='' ">
+            ,dict_key=#{dictKey}
+        </if>
+        <if test="dictValue!=null and dictValue!=''">
+            ,dict_value=#{dictValue}
+        </if>
+        <if test="rootKey!=null and rootKey!=''">
+            ,root_key=#{rootKey}
+        </if>
+
+        where id=#{id}
+    </update>
+    <delete id="dict.delete" parameterType="com.enterprise.entity.Dict" >
+       delete from  t_dict where dict_key=#{dictKey} and root_key=#{rootKey}
+
+    </delete>
+</mapper>
