@@ -1,3 +1,9 @@
+package com.enterprise.entity;
+
+import java.io.Serializable;
+
+import com.enterprise.entity.page.PageModel;
+
 public class Dict extends PageModel implements Serializable {
     private String dictKey;
     private String dictValue;
