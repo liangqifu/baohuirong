@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50520
 File Encoding         : 65001
 
-Date: 2018-11-05 21:08:17
+Date: 2018-11-14 22:42:37
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -70,18 +70,49 @@ INSERT INTO `t_article` VALUES ('17', '1', 'java提高篇-----详解java的四�
 DROP TABLE IF EXISTS `t_articlecategory`;
 CREATE TABLE `t_articlecategory` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `parentid` int(11) DEFAULT NULL,
   `catename` varchar(50) NOT NULL DEFAULT '',
   `description` varchar(255) NOT NULL DEFAULT '',
   `code` varchar(255) DEFAULT NULL,
   `orders` int(11) unsigned NOT NULL DEFAULT '50',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_articlecategory
 -- ----------------------------
-INSERT INTO `t_articlecategory` VALUES ('1', '公司动态', '公司的最新新闻在此发布', 'GongSiDongTai', '1');
-INSERT INTO `t_articlecategory` VALUES ('2', '行业新闻', '最新行业资讯', 'XingYeXinWen', '2');
+INSERT INTO `t_articlecategory` VALUES ('1', '3', '政策', '政策', '1', '2');
+INSERT INTO `t_articlecategory` VALUES ('2', '3', '新闻', '新闻', '2', '3');
+INSERT INTO `t_articlecategory` VALUES ('3', '0', '政策与新闻', '政策与新闻', '001', '1');
+INSERT INTO `t_articlecategory` VALUES ('4', '0', '军民融合产业集群', '军民融合产业集群', '002', '4');
+INSERT INTO `t_articlecategory` VALUES ('5', '0', '技术产品大厅', '技术产品大厅', '003', '10');
+INSERT INTO `t_articlecategory` VALUES ('6', '0', '军民融合需求', '军民融合需求', '004', '15');
+INSERT INTO `t_articlecategory` VALUES ('7', '0', '军民融合服务', '军民融合服务', '005', '27');
+INSERT INTO `t_articlecategory` VALUES ('8', '4', '供需对接类', '供需对接类', '1', '5');
+INSERT INTO `t_articlecategory` VALUES ('9', '4', '创业孵化类', '创业孵化类', '2', '6');
+INSERT INTO `t_articlecategory` VALUES ('10', '4', '科技评估类', '科技评估类', '3', '7');
+INSERT INTO `t_articlecategory` VALUES ('11', '4', '管理咨询类', '管理咨询类', '4', '8');
+INSERT INTO `t_articlecategory` VALUES ('12', '4', '科技投融资类', '科技投融资类', '5', '9');
+INSERT INTO `t_articlecategory` VALUES ('13', '5', '产品', '产品', '1', '11');
+INSERT INTO `t_articlecategory` VALUES ('14', '5', '技术', '技术', '2', '12');
+INSERT INTO `t_articlecategory` VALUES ('15', '5', '专家', '专家', '3', '13');
+INSERT INTO `t_articlecategory` VALUES ('16', '5', '专利', '专利', '4', '14');
+INSERT INTO `t_articlecategory` VALUES ('17', '6', '军转民', '军转民', '1', '16');
+INSERT INTO `t_articlecategory` VALUES ('18', '6', '民参军', '民参军', '2', '22');
+INSERT INTO `t_articlecategory` VALUES ('19', '17', '产品', '产品', '1', '18');
+INSERT INTO `t_articlecategory` VALUES ('20', '17', '技术', '技术', '2', '19');
+INSERT INTO `t_articlecategory` VALUES ('21', '17', '专利', '专利', '3', '20');
+INSERT INTO `t_articlecategory` VALUES ('22', '17', '金融', '金融', '4', '21');
+INSERT INTO `t_articlecategory` VALUES ('23', '18', '产品', '产品', '1', '23');
+INSERT INTO `t_articlecategory` VALUES ('24', '18', '技术', '技术', '2', '24');
+INSERT INTO `t_articlecategory` VALUES ('25', '18', '专利', '专利', '3', '25');
+INSERT INTO `t_articlecategory` VALUES ('26', '18', '金融', '金融', '4', '26');
+INSERT INTO `t_articlecategory` VALUES ('27', '7', '企业参军配套服务', '企业参军配套服务', '1', '28');
+INSERT INTO `t_articlecategory` VALUES ('28', '7', '相关法务服务', '相关法务服务', '2', '29');
+INSERT INTO `t_articlecategory` VALUES ('29', '7', '军工四证服务', '军工四证服务', '3', '30');
+INSERT INTO `t_articlecategory` VALUES ('30', '7', '金融服务', '金融服务', '4', '31');
+INSERT INTO `t_articlecategory` VALUES ('31', '7', '科研服务', '科研服务', '5', '32');
+INSERT INTO `t_articlecategory` VALUES ('32', '7', '其他认证服务', '其他认证服务', '6', '33');
 
 -- ----------------------------
 -- Table structure for t_contact
@@ -188,7 +219,7 @@ INSERT INTO `t_menu` VALUES ('6', '0', '', '内容管理', '4', 'module', 'icon-
 INSERT INTO `t_menu` VALUES ('7', '6', '/manage/article/selectList?init=y', '文章列表', '2', 'page', null);
 INSERT INTO `t_menu` VALUES ('9', '6', '/manage/indexImg/selectList', '门户滚动图片', '6', 'page', null);
 INSERT INTO `t_menu` VALUES ('36', '1', '/manage/systemlog/selectList?init=y', '日志管理', '8', 'page', null);
-INSERT INTO `t_menu` VALUES ('43', '6', '/manage/articleCategory/selectList?init=y', '政策与新闻', '1', 'page', null);
+INSERT INTO `t_menu` VALUES ('43', '6', '/manage/articleCategory/articleCategoryOpen?init=y', '文章分类', '1', 'page', null);
 INSERT INTO `t_menu` VALUES ('49', '1', '/manage/systemSetting/toEdit?init=y', '系统设置', '9', 'page', null);
 INSERT INTO `t_menu` VALUES ('52', '3', '/manage/user/selectList', '查询', '1', 'button', null);
 INSERT INTO `t_menu` VALUES ('55', '3', '/manage/user/insert', '添加', '2', 'button', null);
@@ -295,7 +326,7 @@ CREATE TABLE `t_systemlog` (
   `loginArea` varchar(45) DEFAULT NULL,
   `diffAreaLogin` char(1) DEFAULT 'n',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=446 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=461 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_systemlog
@@ -734,6 +765,21 @@ INSERT INTO `t_systemlog` VALUES ('442', 'loginOut', 'loginOut', '1', 'admin', '
 INSERT INTO `t_systemlog` VALUES ('443', 'login', 'login', '1', 'admin', '0:0:0:0:0:0:0:1', '2018-09-15 13:09:09', '0', 'n');
 INSERT INTO `t_systemlog` VALUES ('444', 'login', 'login', '1', 'admin', '127.0.0.1', '2018-10-29 20:40:46', null, 'n');
 INSERT INTO `t_systemlog` VALUES ('445', 'login', 'login', '1', 'admin', '127.0.0.1', '2018-11-01 20:50:09', null, 'n');
+INSERT INTO `t_systemlog` VALUES ('446', 'login', 'login', '1', 'admin', '127.0.0.1', '2018-11-13 21:06:49', null, 'n');
+INSERT INTO `t_systemlog` VALUES ('447', 'loginOut', 'loginOut', '1', 'admin', '127.0.0.1', '2018-11-13 21:27:16', null, 'n');
+INSERT INTO `t_systemlog` VALUES ('448', 'login', 'login', '1', 'admin', '127.0.0.1', '2018-11-13 21:27:23', null, 'n');
+INSERT INTO `t_systemlog` VALUES ('449', 'login', 'login', '1', 'admin', '127.0.0.1', '2018-11-13 22:38:20', null, 'n');
+INSERT INTO `t_systemlog` VALUES ('450', 'login', 'login', '1', 'admin', '127.0.0.1', '2018-11-13 22:42:16', null, 'n');
+INSERT INTO `t_systemlog` VALUES ('451', 'login', 'login', '1', 'admin', '127.0.0.1', '2018-11-13 22:48:24', null, 'n');
+INSERT INTO `t_systemlog` VALUES ('452', 'loginOut', 'loginOut', '1', 'admin', '127.0.0.1', '2018-11-13 22:52:28', null, 'n');
+INSERT INTO `t_systemlog` VALUES ('453', 'login', 'login', '1', 'admin', '127.0.0.1', '2018-11-14 20:37:05', null, 'n');
+INSERT INTO `t_systemlog` VALUES ('454', 'login', 'login', '1', 'admin', '127.0.0.1', '2018-11-14 21:45:47', null, 'n');
+INSERT INTO `t_systemlog` VALUES ('455', 'login', 'login', '1', 'admin', '127.0.0.1', '2018-11-14 21:51:33', null, 'n');
+INSERT INTO `t_systemlog` VALUES ('456', 'login', 'login', '1', 'admin', '127.0.0.1', '2018-11-14 22:23:00', null, 'n');
+INSERT INTO `t_systemlog` VALUES ('457', 'loginOut', 'loginOut', '1', 'admin', '127.0.0.1', '2018-11-14 22:23:45', null, 'n');
+INSERT INTO `t_systemlog` VALUES ('458', 'login', 'login', '1', 'admin', '127.0.0.1', '2018-11-14 22:23:51', null, 'n');
+INSERT INTO `t_systemlog` VALUES ('459', 'login', 'login', '1', 'admin', '127.0.0.1', '2018-11-14 22:27:13', null, 'n');
+INSERT INTO `t_systemlog` VALUES ('460', 'login', 'login', '1', 'admin', '127.0.0.1', '2018-11-14 22:37:49', null, 'n');
 
 -- ----------------------------
 -- Table structure for t_systemsetting
