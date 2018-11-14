@@ -7,12 +7,53 @@
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
-<%@ include file="/manage/system/pageBase.jsp" %>
-<%@ page info="文章分类" %>
 
-<div style="height:auto!important;height:550px;min-height:550px;">
+<%
+     String path = request.getContextPath();
+    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
+%>
+
+<script type="text/javascript" src="<%=path %>/resource/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="<%=path %>/resource/js/jquery.tab.js"></script>
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="<%=path %>/resource/bootstrap-3.3.5/css/bootstrap.min.css" type="text/css">
+    <script type="text/javascript" src="<%=path %>/resource/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="<%=path %>/resource/bootstrap-3.3.5/js/bootstrap-modal.js"></script>
+    <!-- validator -->
+    <link rel="stylesheet" href="<%=path%>/resource/validator/jquery.validator.css">
+    <script type="text/javascript" src="<%=path%>/resource/validator/jquery.validator.min.js"></script>
+    <script type="text/javascript" src="<%=path%>/resource/validator/local/zh-CN.js"></script>
+    <!-- jcrop -->
+    <link rel="stylesheet" href="<%=path %>/resource/jcrop/css/jquery.Jcrop.css" type="text/css">
+    <script type="text/javascript" src="<%=path %>/resource/jcrop/js/jquery.Jcrop.js"></script>
+
+    <!-- ace -->
+    <link rel="stylesheet" href="<%=path %>/resource/ace/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="<%=path %>/resource/ace/css/ace.min.css" type="text/css">
+    <!--[if lte IE 8]>
+    <link rel="stylesheet" href="<%=path %>/resource/css/ace-ie.min.css"/>
+    <![endif]-->
+    <script src="<%=path %>/resource/ace/js/ace.min.js"></script>
+    <script src="<%=path %>/resource/ace/js/ace-extra.min.js"></script>
+
+    <link rel="stylesheet" href="<%=path%>/resource/css/manageBase.css">
+
+    <!-- metisMenu -->
+    <script src="<%=path %>/resource/metisMenu/metisMenu.min.js"></script>
+
+
+    <!-- zTree树插件 -->
+    <link rel="stylesheet" href="<%=path %>/resource/zTree3.5/css/zTreeStyle/zTreeStyle.css" type="text/css">
+    <script type="text/javascript" src="<%=path %>/resource/zTree3.5/js/jquery.ztree.all-3.5.min.js"></script>
+
+
+    <!-- kindeditor富文本编辑器 -->
+    <link rel="stylesheet" href="<%=path %>/resource/kindeditor/themes/default/default.css"/>
+    <script charset="utf-8" src="<%=path %>/resource/kindeditor/kindeditor-all-min.js"></script>
+    <script charset="utf-8" src="<%=path %>/resource/kindeditor/lang/zh-CN.js"></script>
+
+   <div style="height:auto!important;height:550px;min-height:550px;">
     <h3 style="border-bottom: 1px solid #D7D7D7;color: #666666;font-size: 28px;padding-bottom: 20px;margin-bottom: 30px;">
-        <%=getServletInfo()%>
         <a href="toAdd" class="btn btn-primary"
            style="padding: 2px 15px;float:right;">
             <i class="icon-plus "></i>添加分类
@@ -41,6 +82,3 @@
         </tr>
     </table>
 </div>
-
-
-<%@ include file="/manage/system/baseFoot.jsp" %>

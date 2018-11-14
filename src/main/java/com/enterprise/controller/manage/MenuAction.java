@@ -20,6 +20,7 @@ import com.enterprise.entity.MenuType;
 import com.enterprise.service.Services;
 import com.enterprise.service.impl.MenuServiceImpl;
 import com.enterprise.util.RequestHolder;
+import com.alibaba.fastjson.JSON;
 import com.enterprise.controller.BaseController;
 
 import net.sf.json.JSONArray;
@@ -64,18 +65,9 @@ public class MenuAction  extends BaseController<Menu>{
 			pid="0";
 		}
 		List<MenuItem> menus = menuService.loadMenus(null, pid, "#");
-		return writeMenus(menus);
+		return JSON.toJSONString(menus);
 	}
-	private String writeMenus(List<MenuItem> root) throws IOException{
-		JSONArray json = JSONArray.fromObject(root);
-		String jsonStr = json.toString();
-		try{
-			return jsonStr;
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		return jsonStr;
-	}
+	
 	@RequestMapping(value="delete" ,method=RequestMethod.POST)
 	@ResponseBody
 	public String delete(HttpServletRequest request) throws Exception{

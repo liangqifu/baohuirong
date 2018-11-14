@@ -5,11 +5,20 @@
 <mapper namespace="articlecategory">
     <select id="articlecategory.selectPageList" parameterType="com.enterprise.entity.ArticleCategory" resultType="com.enterprise.entity.ArticleCategory">
         select * from t_articlecategory where 1=1
-        order by id DESC
-        limit #{offset},#{pageSize}
+        <if test="parentid != null">
+           and parentid = #{parentid}
+        </if>
+        order by id asc
+        <if test="offset >0 and pageSize >0">
+           limit #{offset},#{pageSize}
+        </if>
+        
     </select>
     <select id="articlecategory.selectPageCount" parameterType="com.enterprise.entity.ArticleCategory" resultType="java.lang.Integer">
-        select count(*) from t_articlecategory where 1=1
+        select count(*) from t_articlecategory where 1=1 
+        <if test="parentid != null">
+           and parentid = #{parentid}
+        </if>
     </select>
     <insert id="articlecategory.insert" parameterType="com.enterprise.entity.ArticleCategory" useGeneratedKeys="true" keyProperty="id">
         insert into t_articlecategory(
@@ -24,6 +33,10 @@
         <if test="description!=null and description!=''">
             ,description
         </if>
+        <if test="parentid!=null">
+            ,parentid
+        </if>
+        
 
         ) values (
             #{id}
@@ -36,6 +49,9 @@
         </if>
         <if test="description!=null and description!=''">
             ,#{description}
+        </if>
+        <if test="parentid!=null and parentid!=''">
+            ,#{parentid}
         </if>
 
         )
@@ -70,6 +86,7 @@
     </select>
     <select id="articlecategory.selectList" parameterType="com.enterprise.entity.ArticleCategory" resultType="com.enterprise.entity.ArticleCategory">
         select * from t_articlecategory where 1=1
+        
         order by orders
     </select>
     <select id="articlecategory.selectById" parameterType="int" resultType="com.enterprise.entity.ArticleCategory">

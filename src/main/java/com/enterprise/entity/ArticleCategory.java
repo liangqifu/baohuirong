@@ -14,6 +14,7 @@ public class ArticleCategory extends PageModel implements Serializable{
     private int orders;             //排序
     private String code;            //编码
     private String description;     //描述
+    private Integer parentid;	//
 
     @Override
     public void clean() {
@@ -55,4 +56,13 @@ public class ArticleCategory extends PageModel implements Serializable{
     public void setCode(String code) {
         this.code = code;
     }
+
+	public Integer getParentid() {
+		return parentid;
+	}
+
+	public void setParentid(Integer parentid) {
+		this.parentid = parentid;
+	}
+    
 }
