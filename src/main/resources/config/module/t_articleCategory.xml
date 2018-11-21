@@ -8,7 +8,7 @@
         <if test="parentid != null">
            and parentid = #{parentid}
         </if>
-        order by id asc
+        order by orders asc
         <if test="offset >0 and pageSize >0">
            limit #{offset},#{pageSize}
         </if>
@@ -76,7 +76,9 @@
         <if test="id!=0">
             and id=#{id}
         </if>
-
+        <if test="parentid!=null and parentid!=''">
+          and parentid =#{parentid}
+        </if>
         <if test="catename!=null and catename!=''">
             and catename=#{catename}
         </if>
@@ -86,8 +88,10 @@
     </select>
     <select id="articlecategory.selectList" parameterType="com.enterprise.entity.ArticleCategory" resultType="com.enterprise.entity.ArticleCategory">
         select * from t_articlecategory where 1=1
-        
-        order by orders
+         <if test="parentid != null">
+           and parentid = #{parentid}
+        </if>
+        order by orders asc
     </select>
     <select id="articlecategory.selectById" parameterType="int" resultType="com.enterprise.entity.ArticleCategory">
         select * from t_articlecategory where 1=1 and id=#{id}

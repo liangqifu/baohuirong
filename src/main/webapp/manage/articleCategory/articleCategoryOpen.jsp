@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/manage/system/pageBase.jsp" %>
 <%@ page info="文章分类管理"%>
+
 <form action="" name="form1" style="display: none;">
     <input type="hidden" value="" name="id" id="dfsfsf">
 </form>
@@ -39,7 +40,7 @@ var setting = {
                 zTree.expandNode(treeNode);
             },
 			onMouseDown: function (event, treeId, treeNode) {
-                var url = "selectList?parentid="+treeNode.id;
+                var url = "<%=path%>/manage/articleCategory/selectList?parentid="+treeNode.id;
                 if(url){
                     $("#iframeEdit").attr("src",url);
                     return;

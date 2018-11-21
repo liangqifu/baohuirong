@@ -1,28 +1,29 @@
 package com.enterprise.controller.manage;
 
-import com.alibaba.fastjson.JSON;
-import com.enterprise.cache.FrontCache;
-import com.enterprise.service.Services;
-import com.enterprise.entity.ArticleCategory;
-import com.enterprise.entity.MenuItem;
-import com.enterprise.entity.TreeNode;
-import com.enterprise.entity.page.PageModel;
-import com.enterprise.service.ArticleCategoryService;
-import com.enterprise.controller.BaseController;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import com.enterprise.cache.FrontCache;
+import com.enterprise.controller.BaseController;
+import com.enterprise.entity.ArticleCategory;
+import com.enterprise.entity.TreeNode;
+import com.enterprise.entity.page.PageModel;
+import com.enterprise.service.ArticleCategoryService;
+import com.enterprise.service.Services;
 
 /**
  * 文章分类Action
@@ -53,10 +54,13 @@ public class ArticleCategoryAction extends BaseController<ArticleCategory>{
 		return page_toOpen;
 	}
     
-    @Override
     @RequestMapping("selectList")
+    @Override
 	public String selectList(HttpServletRequest request, ArticleCategory e) throws Exception {
-		return super.selectList(request, e);
+    	List<ArticleCategory> list = articleCategoryService.selectList(e);
+		request.setAttribute("list", list);
+		request.setAttribute("parentid", e.getParentid());
+		return page_toList;
 	}
     
 	@RequestMapping(value = "getListAll",method = RequestMethod.GET)
@@ -71,14 +75,32 @@ public class ArticleCategoryAction extends BaseController<ArticleCategory>{
 		}
 		return treeNodes;
 	}
+	/**
+	 * 转到添加页面
+	 * @param e
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("toAdd")
+	@Override
+	public String toAdd(@ModelAttribute("e") ArticleCategory e,ModelMap model) throws Exception{
+		model.addAttribute("e", e);
+		return page_toAdd;
+	}
 
-    @Override
-    public String insert(HttpServletRequest request, @ModelAttribute("e") ArticleCategory articleCategory, RedirectAttributes flushAttrs) throws Exception {
-        articleCategoryService.insert(articleCategory);
-        insertAfter(articleCategory);
+    @RequestMapping(value="save",method=RequestMethod.POST)
+    public String save(HttpServletRequest request, @ModelAttribute("e") ArticleCategory e, RedirectAttributes flushAttrs) throws Exception {
+        
+    	if(e.getId() == 0) {
+        	articleCategoryService.insert(e);
+        }else {
+        	articleCategoryService.update(e);
+        }
         addMessage(flushAttrs,"操作成功！");
         frontCache.loadArticleCategroy();//加载缓存
-        return "redirect:selectList";
+        
+        return "redirect:selectList?parentid="+e.getParentid();
     }
 
     @Override
@@ -97,7 +119,7 @@ public class ArticleCategoryAction extends BaseController<ArticleCategory>{
         frontCache.loadArticleCategroy();//加载缓存
         return "redirect:selectList";
     }
-    @RequestMapping("unique")
+    @RequestMapping(value="unique",method=RequestMethod.POST)
     @ResponseBody
     public String unique(@ModelAttribute("e") ArticleCategory e,HttpServletResponse response) throws IOException {
         response.setCharacterEncoding("utf-8");//设置响应编码为utf-8
@@ -105,7 +127,6 @@ public class ArticleCategoryAction extends BaseController<ArticleCategory>{
             ArticleCategory articleCategory = new ArticleCategory();
             articleCategory.setCatename(e.getCatename());
             articleCategory = articleCategoryService.selectOne(articleCategory);
-
             if(articleCategory==null){
                 return "{}";
             }else{
@@ -118,6 +139,7 @@ public class ArticleCategoryAction extends BaseController<ArticleCategory>{
         }else if(StringUtils.isNotBlank(e.getCode())){
             ArticleCategory articleCategory = new ArticleCategory();
             articleCategory.setCode(e.getCode());
+            articleCategory.setParentid(e.getParentid());
             articleCategory = articleCategoryService.selectOne(articleCategory);
             if(articleCategory==null){
                 return "{}";
