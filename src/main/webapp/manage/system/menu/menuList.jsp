@@ -21,9 +21,6 @@
 	<tr>
 		<td>
 			<div style="min-width: 200px;">
-				<div id="loadImg" style="text-align: center;">
-					<img alt="菜单加载中......" src="<%=path %>/resource/images/loader.gif">资源加载中...
-				</div>			
 				<ul id="treeDemo2" style="display: none;" class="ztree"></ul>
 			</div>
 		</td>
@@ -76,7 +73,6 @@ function loadMenusTree(){
 						var zNodes = eval('('+data+')');
 						
 						$.fn.zTree.init($("#treeDemo2"), setting, zNodes);
-						$("#loadImg").hide();
 						$("#treeDemo2").show();
 					},
 					error:function(){

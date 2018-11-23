@@ -6,12 +6,12 @@ import java.io.Serializable;
 
 /**
  * 文章实体类
- * Created by Cesiumai on 2016/6/14.
  */
 public class Article extends PageModel implements Serializable{
     private static final long serialVersionUID = 1L;
     private String title;       //文章标题
     private String categoryId;  //文章所属类别Id
+    private String usecategoryId;
     private String content;     //文章内容
     private String keywords;    //文章关键字
     private String createtime;  //创建时间
@@ -26,6 +26,7 @@ public class Article extends PageModel implements Serializable{
         super.clean();
         title=null;
         categoryId=null;
+        usecategoryId=null;
         content=null;
         keywords=null;
         createtime=null;
@@ -116,8 +117,17 @@ public class Article extends PageModel implements Serializable{
     public void setCatename(String catename) {
         this.catename = catename;
     }
+    
 
-    @Override
+    public String getUsecategoryId() {
+		return usecategoryId;
+	}
+
+	public void setUsecategoryId(String usecategoryId) {
+		this.usecategoryId = usecategoryId;
+	}
+
+	@Override
     public String toString() {
         return "Article{" +
                 "title='" + title + '\'' +

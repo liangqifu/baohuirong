@@ -25,12 +25,41 @@
 		<if test="contentHtml!=null and contentHtml!=''">
 			,contentHtml
 		</if>
-
+		<if test="mobile!=null and mobile!=''">
+			,mobile
+		</if>
+		<if test="email!=null and email!=''">
+			,email
+		</if>
+		<if test="phone!=null and phone!=''">
+			,phone
+		</if>
+		<if test="address!=null and address!=''">
+			,address
+		</if>
+		<if test="website!=null and website!=''">
+			,address
+		</if>
 
 		) values (
 		#{id}
 		<if test="contentHtml!=null and contentHtml!=''">
 			,#{contentHtml}
+		</if>
+		<if test="mobile!=null and mobile!=''">
+			,#{mobile}
+		</if>
+		<if test="email!=null and email!=''">
+			,#{email}
+		</if>
+		<if test="phone!=null and phone!=''">
+			,#{phone}
+		</if>
+		<if test="address!=null and address!=''">
+			,#{address}
+		</if>
+		<if test="website!=null and website!=''">
+			,#{website}
 		</if>
 		)
 	</insert>
@@ -40,6 +69,21 @@
 		set id=#{id}
 		<if test="contentHtml!=null and contentHtml!=''">
 			,contentHtml=#{contentHtml}
+		</if>
+		<if test="mobile!=null and mobile!=''">
+			,mobile=#{mobile}
+		</if>
+		<if test="email!=null and email!=''">
+			,email=#{email}
+		</if>
+		<if test="phone!=null and phone!=''">
+			,phone=#{phone}
+		</if>
+		<if test="address!=null and address!=''">
+			,address=#{address}
+		</if>
+		<if test="website!=null and website!=''">
+			,website=#{website}
 		</if>
 			where 1=1 and id=#{id}
 	</update>

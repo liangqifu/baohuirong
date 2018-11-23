@@ -6,16 +6,18 @@ import java.io.Serializable;
 
 /**
  * 关于我们
- * Created by Cesiumai on 2016/7/14.
  */
 public class About extends PageModel implements Serializable{
     private static final long serialVersionUID = 1L;
     private String contentHtml;
+    private String title;
+    private Integer orders;
 
     @Override
     public void clean() {
         super.clean();
         contentHtml=null;
+        title=null;
     }
 
     public String getContentHtml() {
@@ -25,4 +27,22 @@ public class About extends PageModel implements Serializable{
     public void setContentHtml(String contentHtml) {
         this.contentHtml = contentHtml;
     }
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public Integer getOrders() {
+		return orders;
+	}
+
+	public void setOrders(Integer orders) {
+		this.orders = orders;
+	}
+	
+    
 }

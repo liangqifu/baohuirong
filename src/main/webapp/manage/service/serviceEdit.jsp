@@ -1,20 +1,14 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Cesiumai
-  Date: 2016/6/14
-  Time: 14:15
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ include file="/manage/system/pageBase.jsp" %>
-<%@ page info="文章列表" %>
+<%@ page info="相关新闻" %>
 <%
     Map<String,String> statuss = new LinkedHashMap<String,String>();
     statuss.put("y","显示");
     statuss.put("n","不显示");
 %>
-<form action="<%=path %>/manage/service" name="form" id="form" method="post">
+<form action="<%=path %>/manage/service/save" name="form" id="form" method="post">
     <div style="height:auto!important;height:550px;min-height:550px;">
         <h3 style="border-bottom: 1px solid #D7D7D7;color: #666666;font-size: 28px;padding-bottom: 20px;margin-bottom: 30px;">
             <%=getServletInfo()%>
@@ -28,10 +22,17 @@
                 <td><input type="hidden" value="${e.id}" name="id" label="id"/></td>
             </tr>
             <tr>
-                <th style="text-align: right;" width="200">服务标题</th>
+                <th style="text-align: right;" width="200">标题</th>
                 <td style="text-align: left;"><input type="text" size="40" value="${e.title}" name="title"
-                                                     data-rule="服务标题:required;title;length[1~45];"
+                                                     data-rule="标题:required;title;length[1~45];"
                                                      id="title"/></td>
+            </tr>
+            
+            <tr>
+                <th style="text-align: right;" width="200">链接</th>
+                <td style="text-align: left;"><input type="text" size="40" value="${e.url}" name="url"
+                                                     data-rule="链接:required;url;length[1~500];"
+                                                     id="url"/></td>
             </tr>
 
             <tr>
@@ -53,29 +54,19 @@
                 </td>
             </tr>
 
-            <tr>
+            <%-- <tr>
                 <th style="text-align: right;">内容</th>
                 <td style="text-align: left;">
                     <textarea name="contentHtml" id="contentHtml" data-rule="文章内容:required;"
                               style="width:850px;height:400px;visibility:hidden;">${e.contentHtml}</textarea>
                 </td>
-            </tr>
+            </tr> --%>
             <tr>
                 <td colspan="2" style="text-align: center;">
-                    <c:choose>
-                        <c:when test="${e.id!=0}">
-                            <button method="update" onclick="commit(this)" class="btn btn-info"
+                    <button method="update" onclick="commit()" class="btn btn-info"
                                     style="padding:2px 15px;">
-                                保存
+                                                        保存
                             </button>
-                        </c:when>
-                        <c:otherwise>
-                            <button method="insert" onclick="commit(this)" class="btn btn-info"
-                                    style="padding:2px 15px;">
-                                新增
-                            </button>
-                        </c:otherwise>
-                    </c:choose>
                 </td>
             </tr>
         </table>
@@ -129,10 +120,9 @@
         });
 
     });
-    function commit(obj) {
-        content.sync();
+    function commit() {
+       // content.sync();
         var _form = $("form");
-        _form.attr("action", $(obj).attr("method"));
         _form.submit();
     }
 </script>

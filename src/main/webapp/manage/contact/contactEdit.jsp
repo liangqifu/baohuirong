@@ -1,15 +1,9 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Cesiumai
-  Date: 2016/7/8
-  Time: 16:14
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ include file="/manage/system/pageBase.jsp" %>
 <%@ page info="联系我们" %>
-<form action="<%=path %>/manage/contact" name="form" id="form" method="post">
+<form action="<%=path %>/manage/contact/save" name="form" id="form" method="post">
     <div style="height:auto!important;height:550px;min-height:550px;">
         <h3 style="border-bottom: 1px solid #D7D7D7;color: #666666;font-size: 28px;padding-bottom: 20px;margin-bottom: 30px;">
             <%=getServletInfo()%>
@@ -21,28 +15,48 @@
                 <td><input type="hidden" value="${e.id}" name="id" label="id"/></td>
             </tr>
             <tr>
+                <th style="text-align: right;" width="200">电话</th>
+                <td style="text-align: left;">
+                  <input name="mobile" id="mobile" value="${e.mobile}" data-rule="电话:required;tel;" ></input>
+                </td>
+            </tr>
+            <tr>
+                <th style="text-align: right;" width="200">手机</th>
+                <td style="text-align: left;">
+                  <input name="phone" id="phone" value="${e.phone}" data-rule="手机:required;mobile;" ></input>
+                </td>
+            </tr>
+            <tr>
+                <th style="text-align: right;" width="200">邮箱</th>
+                <td style="text-align: left;">
+                  <input name="email" id="email" value="${e.email}" data-rule="邮箱:required;email;" ></input>
+                </td>
+            </tr>
+            <tr>
+                <th style="text-align: right;" width="200">地址</th>
+                <td style="text-align: left;">
+                  <input name="address" id="address" value="${e.address}" data-rule="地址:required;" ></input>
+                </td>
+            </tr>
+            <tr>
+                <th style="text-align: right;" width="200">网址</th>
+                <td style="text-align: left;">
+                  <input name="website" id="website" value="${e.website}" data-rule="网址:required;" ></input>
+                </td>
+            </tr>
+            <%-- <tr>
                 <th style="text-align: right;" width="200">内容</th>
                 <td style="text-align: left;">
      <textarea name="contentHtml" id="contentHtml" data-rule="内容:required;"
                style="width:850px;height:400px;visibility:hidden;">${e.contentHtml}</textarea>
                 </td>
-            </tr>
+            </tr> --%>
             <tr>
                 <td colspan="2" style="text-align: center;">
-                    <c:choose>
-                        <c:when test="${e.id!=0}">
-                            <button method="update" onclick="commit(this)" class="btn btn-info"
+                    <button  onclick="commit()" class="btn btn-info"
                                     style="padding:2px 15px;">
                                 保存
                             </button>
-                        </c:when>
-                        <c:otherwise>
-                            <button method="insert" onclick="commit(this)" class="btn btn-info"
-                                    style="padding:2px 15px;">
-                                新增
-                            </button>
-                        </c:otherwise>
-                    </c:choose>
                 </td>
             </tr>
         </table>
@@ -91,10 +105,9 @@
         });
 
     });
-    function commit(obj) {
-        content.sync();
+    function commit() {
+       // content.sync();
         var _form = $("form");
-        _form.attr("action", $(obj).attr("method"));
         _form.submit();
     }
 </script>

@@ -62,13 +62,13 @@
                 <th style="text-align: right; width: 20%;white-space: nowrap;">分类名称</th>
                 <td style="text-align: left;">
                 <input type="text" size="40" value="${e.catename}" name="catename"
-                                                     data-rule="分类名称:required;catename;length[1~45];remote[unique, id]" 
+                                                     data-rule="分类名称:required;catename;length[1~45];remote[unique?id=${e.id}, parentid:parentid]" 
                                                      id="catename"/>
                 </td>
             </tr>
             <tr>
                 <th style="text-align: right; width: 20% ;white-space: nowrap;" >编码</th>
-                <td style="text-align: left;"><input type="text" size="40" value="${e.code}" name="code" id="code" data-rule="编码:required;code;length[1~45];remote[unique, parentid:id]"/></td>
+                <td style="text-align: left;"><input type="text" size="40" value="${e.code}" name="code" id="code" data-rule="编码:required;code;length[1~45];remote[unique?id=${e.id}, parentid:parentid]"/></td>
             </tr>
             <tr>
                 <th style="text-align: right;  width: 20% ">排序</th>

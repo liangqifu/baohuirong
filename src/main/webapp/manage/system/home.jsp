@@ -15,7 +15,7 @@
 </style>
 <div id="index" style="padding-top:18px;height:auto!important;height:550px;min-height:550px;">
 
-    <div class="indexBox">
+    <div class="indexBox" style="display: none;">
         <div class="boxTitle">服务器信息</div>
         <ul>
             <table width="100%" border="0" cellspacing="0" cellpadding="7" class="tableBasic">
@@ -55,7 +55,7 @@
     </div>
 
     <div class="indexBox">
-        <div class="boxTitle">SEO设置</div>
+        <div class="boxTitle">网站设置</div>
         <ul>
             <table width="100%" border="0" cellspacing="0" cellpadding="7" class="tableBasic">
                 <tr>

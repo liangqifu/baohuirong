@@ -50,7 +50,7 @@
         <if test="description!=null and description!=''">
             ,#{description}
         </if>
-        <if test="parentid!=null and parentid!=''">
+        <if test="parentid!=null">
             ,#{parentid}
         </if>
 

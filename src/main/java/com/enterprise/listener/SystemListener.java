@@ -10,7 +10,6 @@ import com.enterprise.cache.FrontCache;
 import com.enterprise.core.SystemManage;
 /**
  * 系统配置加载监听器
- * @author Administrator
  *
  */
 public class SystemListener implements ServletContextListener{

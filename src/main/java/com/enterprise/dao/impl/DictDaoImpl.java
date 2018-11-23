@@ -12,7 +12,6 @@ import com.enterprise.entity.Dict;
 import com.enterprise.entity.page.PageModel;
 
 /**
- * Created by Cesiumai on 2016/7/8.
  */
 @Repository("dictDao")
 public class DictDaoImpl implements DictDao {

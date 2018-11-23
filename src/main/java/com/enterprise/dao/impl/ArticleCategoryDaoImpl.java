@@ -10,7 +10,6 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * Created by Cesiumai on 2016/6/14.
  */
 @Repository("articleCategoryDao")
 public class ArticleCategoryDaoImpl implements ArticleCategoryDao {

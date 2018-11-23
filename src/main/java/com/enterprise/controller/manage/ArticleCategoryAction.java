@@ -27,7 +27,6 @@ import com.enterprise.service.Services;
 
 /**
  * 文章分类Action
- * Created by Cesiumai on 2016/6/14.
  */
 @Controller
 @RequestMapping("/manage/articleCategory/")
@@ -65,13 +64,31 @@ public class ArticleCategoryAction extends BaseController<ArticleCategory>{
     
 	@RequestMapping(value = "getListAll",method = RequestMethod.GET)
 	@ResponseBody
-	public List<TreeNode> getListByPid(HttpServletRequest request) throws Exception{
+	public List<TreeNode> getListAll(HttpServletRequest request) throws Exception{
+		ArticleCategory e = new ArticleCategory();
+		List<ArticleCategory> list = articleCategoryService.selectList(e);
+		List<TreeNode> treeNodes = new ArrayList<TreeNode>(list.size());
+		treeNodes.add(new TreeNode("0","", "根节点", true, false, false));
+		for (ArticleCategory articleCategory : list) {
+			
+			treeNodes.add(new TreeNode(articleCategory.getId()+"", articleCategory.getParentid()+"", articleCategory.getCatename(), false, false, false));
+		}
+		return treeNodes;
+	}
+	
+	@RequestMapping(value = "getUseListAll",method = RequestMethod.GET)
+	@ResponseBody
+	public List<TreeNode> getUseListAll(HttpServletRequest request) throws Exception{
 		ArticleCategory e = new ArticleCategory();
 		List<ArticleCategory> list = articleCategoryService.selectList(e);
 		List<TreeNode> treeNodes = new ArrayList<TreeNode>(list.size());
 		for (ArticleCategory articleCategory : list) {
-			
-			treeNodes.add(new TreeNode(articleCategory.getId()+"", articleCategory.getParentid()+"", articleCategory.getCatename(), false, false, false));
+			if("应用领域".equals(articleCategory.getCatename())) {
+				continue;
+			}
+			if(!String.valueOf(articleCategory.getParentid()).equals("34")) {
+				treeNodes.add(new TreeNode(articleCategory.getId()+"", articleCategory.getParentid()+"", articleCategory.getCatename(), true, false, false));
+			}
 		}
 		return treeNodes;
 	}
@@ -91,7 +108,6 @@ public class ArticleCategoryAction extends BaseController<ArticleCategory>{
 
     @RequestMapping(value="save",method=RequestMethod.POST)
     public String save(HttpServletRequest request, @ModelAttribute("e") ArticleCategory e, RedirectAttributes flushAttrs) throws Exception {
-        
     	if(e.getId() == 0) {
         	articleCategoryService.insert(e);
         }else {
@@ -102,22 +118,14 @@ public class ArticleCategoryAction extends BaseController<ArticleCategory>{
         
         return "redirect:selectList?parentid="+e.getParentid();
     }
-
-    @Override
-    public String update(HttpServletRequest request, @ModelAttribute("e") ArticleCategory articleCategory, RedirectAttributes flushAttrs) throws Exception {
-        articleCategoryService.update(articleCategory);
-        insertAfter(articleCategory);
-        addMessage(flushAttrs, "操作成功！");
-        frontCache.loadArticleCategroy();//加载缓存
-        return "redirect:selectList";
-    }
+    
     @RequestMapping("delete")
     public String delete(HttpServletRequest request, @ModelAttribute("e") ArticleCategory articleCategory, RedirectAttributes flushAttrs) throws Exception{
         articleCategoryService.delete(articleCategory);
         insertAfter(articleCategory);
         addMessage(flushAttrs, "操作成功！");
         frontCache.loadArticleCategroy();//加载缓存
-        return "redirect:selectList";
+        return "redirect:selectList?parentid="+articleCategory.getParentid();
     }
     @RequestMapping(value="unique",method=RequestMethod.POST)
     @ResponseBody
@@ -126,6 +134,7 @@ public class ArticleCategoryAction extends BaseController<ArticleCategory>{
         if(StringUtils.isNotBlank(e.getCatename())){
             ArticleCategory articleCategory = new ArticleCategory();
             articleCategory.setCatename(e.getCatename());
+            articleCategory.setParentid(e.getParentid());
             articleCategory = articleCategoryService.selectOne(articleCategory);
             if(articleCategory==null){
                 return "{}";

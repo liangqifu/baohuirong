@@ -1,14 +1,8 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Cesiumai
-  Date: 2016/6/14
-  Time: 14:15
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ include file="/manage/system/pageBase.jsp" %>
-<%@ page info="服务领域" %>
+<%@ page info="相关新闻" %>
 
 <form action="<%=path%>/manage/service" method="post">
     <div style="height:auto!important;height:550px;min-height:550px;">
@@ -16,12 +10,12 @@
             <%=getServletInfo()%>
             <a href="toAdd" class="btn btn-primary"
                style="padding: 2px 15px;float:right;">
-                <i class="icon-plus "></i>添加服务
+                <i class="icon-plus "></i>添加相关新闻
             </a>
         </h3>
         <div class="filter">
             <button method="deletes" class="btn btn-danger" style="padding:0px 5px;margin-top: -4px;"
-                    onclick="return submitIDs(this,'确定删除选择的服务信息?');">
+                    onclick="return submitIDs(this,'确定删除选择的相关新闻?');">
                 <i class="icon-trash"></i>删除
             </button>
             <div style="float: right">
@@ -36,17 +30,25 @@
         <table class="table table-bordered table-hover table-striped">
             <tr>
                 <th width="50"><input type="checkbox" id="firstCheckbox"/></th>
-                <th>服务标题</th>
+                <th>标题</th>
+                <th>链接</th>
+                <th>创建时间</th>
                 <th>状态</th>
                 <th>排序</th>
                 <th width="200">操作</th>
             </tr>
             <c:forEach var="item" items="${pager.list}">
                 <tr>
-                    <td><input type="checkbox" name="ids"
-                               value="${item.id}"/></td>
+                    <td><input type="checkbox" name="ids"value="${item.id}"/></td>
                     <td>${item.title}</td>
-                    <td>${item.status}</td>
+                    <td>${item.url}</td>
+                    <td>${item.createtime}</td>
+                    <td>
+                       <c:choose>
+                       <c:when test="${item.status =='y'}">显示</c:when>
+                        <c:otherwise>不显示</c:otherwise>
+                       </c:choose>
+                     </td>
                     <td>${item.orders}</td>
                     <td><a href="toEdit?id=${item.id}">编辑</a> | <a href="delete?id=${item.id}">删除</a></td>
                 </tr>
@@ -76,7 +78,6 @@
         }
 
         if (confirm(tip)) {
-            //createMark();
             var _form = $("form");
             _form.attr("action", $(obj).attr("method"));
             _form.submit();

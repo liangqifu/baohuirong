@@ -6,7 +6,6 @@ import java.io.Serializable;
 
 /**
  * 文章分类实体类
- * Created by Cesiumai on 2016/6/14.
  */
 public class ArticleCategory extends PageModel implements Serializable{
     private static final long serialVersionUID = 1L;
@@ -24,8 +23,17 @@ public class ArticleCategory extends PageModel implements Serializable{
         code = null;
         description=null;
     }
+    
+    public ArticleCategory() {
+    	
+	}
+    
+    public ArticleCategory(Integer parentid) {
+		this.parentid = parentid;
+	}
 
-    public String getDescription() {
+
+	public String getDescription() {
         return description;
     }
 

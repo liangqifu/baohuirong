@@ -23,6 +23,9 @@
         <if test="title!=null and title!=''">
             ,title
         </if>
+        <if test="url!=null and url!=''">
+            ,url
+        </if>
 
         <if test="contentHtml!=null and contentHtml!=''">
             ,contentHtml
@@ -33,10 +36,14 @@
         <if test="orders!=null and orders!=''">
             ,orders
         </if>
+        ,createtime
         ) values (
         #{id}
         <if test="title!=null and title!=''">
             ,#{title}
+        </if>
+        <if test="url!=null and url!=''">
+            ,#{url}
         </if>
 
         <if test="contentHtml!=null and contentHtml!=''">
@@ -48,7 +55,7 @@
         <if test="orders &gt; 0">
             ,#{orders}
         </if>
-
+        ,now()
         )
     </insert>
     <update id="service.update" parameterType="com.enterprise.entity.Service">
@@ -56,6 +63,9 @@
         id = #{id}
         <if test="title!=null and title!=''">
             ,title=#{title}
+        </if>
+        <if test="url!=null and url!=''">
+            ,url=#{url}
         </if>
         <if test="contentHtml!=null and contentHtml!=''">
             ,contentHtml=#{contentHtml}

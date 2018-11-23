@@ -1,10 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Cesiumai
-  Date: 2016/6/14
-  Time: 14:14
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -74,7 +68,7 @@
                 <td>${item.code}</td>
                 <td>${item.description}</td>
                 <td>${item.orders}</td>
-                <td><a href="toEdit?id=${item.id}">编辑</a> | <a href="delete?id=${item.id}">删除</a></td>
+                <td><a href="toEdit?id=${item.id}">编辑</a> | <a href="delete?id=${item.id}&parentid=${item.parentid}">删除</a></td>
             </tr>
         </c:forEach>
         

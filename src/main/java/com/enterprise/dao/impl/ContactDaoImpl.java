@@ -10,7 +10,6 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * Created by Cesiumai on 2016/7/8.
  */
 @Repository("contactDao")
 public class ContactDaoImpl implements ContactDao{

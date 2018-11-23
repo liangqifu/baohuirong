@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/manage/system/pageBase.jsp" %>
-<%@ page info="文章分类管理"%>
+<%@ page info="字典分类管理"%>
 
 <form action="" name="form1" style="display: none;">
     <input type="hidden" value="" name="id" id="dfsfsf">
@@ -37,7 +37,7 @@ var setting = {
 		},callback: {
 			onClick: function(e,treeId, treeNode) {
                 var zTree = $.fn.zTree.getZTreeObj("treeDemo2");
-                zTree.expandNode(treeNode);
+               // zTree.expandNode(treeNode);
             },
 			onMouseDown: function (event, treeId, treeNode) {
                 var url = "<%=path%>/manage/articleCategory/selectList?parentid="+treeNode.id;

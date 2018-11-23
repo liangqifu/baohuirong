@@ -6,7 +6,7 @@
     <select id="article.selectPageList" parameterType="com.enterprise.entity.Article" resultType="com.enterprise.entity.Article">
         select a.*,ac.catename from t_article a join t_articlecategory ac on a.categoryId=ac.id where 1=1
         <if test="categoryId!=null and categoryId!=''">
-            and a.categoryId=#{categoryId}
+            and a.categoryId in (select id from t_articlecategory where FIND_IN_SET(id, queryChildrenInfo(#{categoryId})))
         </if>
         <if test="title!=null and title!=''">
             and a.title like "%"#{title}"%"
@@ -17,7 +17,7 @@
     <select id="article.selectPageCount" parameterType="com.enterprise.entity.Article" resultType="java.lang.Integer">
         select count(*) from t_article where 1=1
         <if test="categoryId!=null and categoryId!=''">
-            and categoryId=#{categoryId}
+            and categoryId in (select id from t_articlecategory where FIND_IN_SET(id, queryChildrenInfo(#{categoryId})))
         </if>
         <if test="title!=null and title!=''">
             and title like "%"#{title}"%"
@@ -32,6 +32,10 @@
         <if test="categoryId!=null and categoryId!=''">
             ,categoryId
         </if>
+        <if test="usecategoryId!=null and usecategoryId!=''">
+            ,usecategoryId
+        </if>
+        
         <if test="content!=null and content!=''">
             ,content
         </if>
@@ -59,6 +63,9 @@
         <if test="categoryId!=null and categoryId!=''">
             ,#{categoryId}
         </if>
+        <if test="usecategoryId!=null and usecategoryId!=''">
+            ,#{usecategoryId}
+        </if>
         <if test="content!=null and content!=''">
             ,#{content}
         </if>
@@ -69,7 +76,6 @@
         <if test="hit!=null and hit!=''">
             ,#{hit}
         </if>
-            ,#{orders}
         <if test="image!=null and image!=''">
             ,#{image}
         </if>
@@ -89,6 +95,9 @@
         </if>
         <if test="categoryId!=null and categoryId!=''">
             ,categoryId=#{categoryId}
+        </if>
+        <if test="usecategoryId!=null and usecategoryId!=''">
+            ,usecategoryId=#{usecategoryId}
         </if>
         <if test="content!=null and content!=''">
             ,content=#{content}
@@ -112,28 +121,28 @@
         where id = #{id}
     </update>
     <select id="article.selectOne" parameterType="com.enterprise.entity.Article" resultType="com.enterprise.entity.Article">
-        select * from t_article where 1=1
+        select a.* ,ac.catename from t_article a join t_articlecategory ac on a.categoryId=ac.id  where 1=1
         <if test="id!=0">
-            and id=#{id}
+            and a.id=#{id}
         </if>
         <if test="title!=null and title!=''">
-            and title=#{title}
+            and a.title=#{title}
         </if>
     </select>
 
 
     <select id="article.selectList" parameterType="com.enterprise.entity.Article" resultType="com.enterprise.entity.Article">
-        select * from t_article where 1=1
+        select a.*,ac.catename from t_article a join t_articlecategory ac on a.categoryId=ac.id where 1=1
         order by id DESC
     </select>
     <select id="article.selectById" parameterType="int" resultType="com.enterprise.entity.Article">
-        select * from t_article where 1=1 and id=#{id}
+        select  a.* ,ac.catename from t_article a join t_articlecategory ac on a.categoryId=ac.id where 1=1 and a.id=#{id}
     </select>
     <select id="article.selectNext" parameterType="int" resultType="com.enterprise.entity.Article">
-        select * from t_article where id = (select id from t_article where id &lt; #{id} order by id desc limit 1)
+        select a.* ,ac.catename from t_article a join t_articlecategory ac on a.categoryId=ac.id where a.id = (select id from t_article where id &lt; #{id} order by id desc limit 1)
     </select>
     <select id="article.selectPrevious" parameterType="int" resultType="com.enterprise.entity.Article">
-        select * from t_article where id = (select id from t_article where id &gt; #{id} order by id desc limit 1)
+        select a.* ,ac.catename from t_article a join t_articlecategory ac on a.categoryId=ac.id where a.id = (select id from t_article where id &gt; #{id} order by id desc limit 1)
     </select>
     <delete id="article.delete" parameterType="com.enterprise.entity.Article">
         delete from t_article where id=#{id}

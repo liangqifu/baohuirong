@@ -1,10 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Cesiumai
-  Date: 2016/6/14
-  Time: 14:15
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ include file="/manage/system/pageBase.jsp" %>
@@ -14,7 +8,7 @@
     statuss.put("y","显示");
     statuss.put("n","不显示");
 %>
-<form action="<%=path %>/manage/article" name="form" id="form" method="post">
+<form action="<%=path %>/manage/article/save" name="form" id="form" method="post">
     <div style="height:auto!important;height:550px;min-height:550px;">
         <h3 style="border-bottom: 1px solid #D7D7D7;color: #666666;font-size: 28px;padding-bottom: 20px;margin-bottom: 30px;">
             <%=getServletInfo()%>
@@ -36,8 +30,16 @@
             <tr>
                 <th style="text-align: right;">文章分类</th>
                 <td style="text-align: left;">
-                    <select id="categoryId" name="categoryId">
-                        <c:forEach var="item" items="<%=SystemManage.getInstance().getArticleCategory()%>">
+                    <input type="hidden" id="categoryId" name="categoryId" value="${e.categoryId}"  ></input>
+                    <input id="categoryName" value="${e.catename}" readonly="readonly"  style="width: 33%;" data-rule="文章分类:required;categoryId;" name="categoryName" type="text" placeholder="请选择文章分类"  />
+                </td>
+            </tr>
+            <tr>
+                <th style="text-align: right;">应用领域</th>
+                <td style="text-align: left;">
+                   <select id="usecategoryId" name="usecategoryId">
+                         <option value="">请选择</option>
+                        <c:forEach var="item" items="${categoryList}">
                             <option value="${item.id}" <c:if test="${e.categoryId eq item.id}">selected="selected" </c:if>>${item.catename}</option>
                         </c:forEach>
                     </select>
@@ -82,26 +84,19 @@
             </tr>
             <tr>
                 <td colspan="2" style="text-align: center;">
-                    <c:choose>
-                        <c:when test="${e.id!=0}">
-                            <button method="update" onclick="commit(this)" class="btn btn-info"
+                    <button onclick="commit(this)" class="btn btn-info"
                                     style="padding:2px 15px;">
-                                保存
+                                                                保存
                             </button>
-                        </c:when>
-                        <c:otherwise>
-                            <button method="insert" onclick="commit(this)" class="btn btn-info"
-                                    style="padding:2px 15px;">
-                                新增
-                            </button>
-                        </c:otherwise>
-                    </c:choose>
                 </td>
             </tr>
         </table>
     </div>
 </form>
-
+<div id="menuContent" class="menuContent" style="displayx: none; position: absolute;z-index: 1000;width: 26%;background-color: #edf0f3;">
+      <ul id="treeDemo" class="ztree" style="margin-top: 0; width:100%;">
+      </ul>
+</div>
 <script type="text/javascript">
 
     var content;
@@ -159,11 +154,82 @@
         });
 
     });
-    function commit(obj) {
+    function commit() {
         content.sync();
         var _form = $("form");
-        _form.attr("action", $(obj).attr("method"));
         _form.submit();
+    }
+    $(function () {
+    	createTree("#treeDemo");
+    	hideMenu();
+    	$("body").bind("mousedown", 
+                function(event){
+                    if (!(event.target.id == "menuContent" || $(event.target).parents("#menuContent").length>0)) {
+                        hideMenu();
+                    }
+                }
+        ); 
+        $("#categoryName").bind("click",
+                 function(){
+         	            showMenu();
+                 }
+        );
+    })
+    
+    //显示树
+    function showMenu() {
+                var cityObj = $("#categoryName");
+                var cityOffset = $("#categoryName").offset();
+                $("#menuContent").css({ left: cityOffset.left-195 + "px", top: cityOffset.top + cityObj.outerHeight()-95	 + "px" }).slideDown("fast");
+    }
+           
+     //隐藏树
+    function hideMenu() {
+                $("#menuContent").fadeOut("fast");
+    }
+    
+    function createTree(treeId) {
+        var zTree; //用于保存创建的树节点
+        var setting = { //设置
+            check: {
+                enable: false
+            },
+            view: {
+                showLine: true, //显示辅助线
+                dblClickExpand: true,
+            },
+            data:{
+            	simpleData: {
+    				enable: true
+    			}
+            },callback: {
+            	beforeClick:function (treeId, treeNode){
+            		 var check = (treeNode && !treeNode.isParent);
+            		 if (!check) alert("只能选择子分类");
+            		 return check;
+            	},
+                onClick: function(e, treeId, treeNode){
+                	if (treeNode) {
+                		$("#categoryName").val(treeNode.name);
+                		$("#categoryId").val(treeNode.id);
+                		hideMenu();
+                	}
+                    
+                }
+            }
+        };
+        $.ajax({ //请求数据,创建树
+            type: 'GET',
+            url: '<%=path%>/manage/articleCategory/getUseListAll',
+            dataType: "json", //返回的结果为json  
+            success: function(data) {
+            	
+                zTree = $.fn.zTree.init($(treeId), setting, data); //创建树
+            },
+            error: function(data) {
+                alert("创建树失败!");
+            }
+        });
     }
 </script>
 

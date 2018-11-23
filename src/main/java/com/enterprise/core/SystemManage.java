@@ -22,7 +22,6 @@ import java.util.Properties;
 /**
  * 系统管理类
  *
- * @author Cesiumai
  */
 public class SystemManage {
     private static Properties p = new Properties();

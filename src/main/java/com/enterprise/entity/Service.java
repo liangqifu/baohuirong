@@ -6,10 +6,11 @@ import java.io.Serializable;
 
 /**
  * 服务领域实体类
- * Created by Cesiumai on 2016/7/15.
  */
 public class Service extends PageModel implements Serializable{
     private String title;
+    private String url;
+    private String createtime;  //创建时间
     private String contentHtml;
     private String status;
     private int orders;
@@ -18,6 +19,8 @@ public class Service extends PageModel implements Serializable{
     public void clean() {
         super.clean();
         title=null;
+        url=null;
+        createtime=null;
         contentHtml=null;
         status=null;
         orders=0;
@@ -54,4 +57,21 @@ public class Service extends PageModel implements Serializable{
     public void setOrders(int orders) {
         this.orders = orders;
     }
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public String getCreatetime() {
+		return createtime;
+	}
+
+	public void setCreatetime(String createtime) {
+		this.createtime = createtime;
+	}
+    
 }

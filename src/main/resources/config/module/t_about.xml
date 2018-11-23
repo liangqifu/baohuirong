@@ -25,12 +25,24 @@
 		<if test="contentHtml!=null and contentHtml!=''">
 			,contentHtml
 		</if>
+		<if test="title!=null and title!=''">
+			,title
+		</if>
+		<if test="orders!=null and orders!=''">
+			,orders
+		</if>
 
 
 		) values (
 		#{id}
 		<if test="contentHtml!=null and contentHtml!=''">
 			,#{contentHtml}
+		</if>
+		<if test="title!=null and title!=''">
+			,#{title}
+		</if>
+		<if test="orders!=null and orders!=''">
+			,#{orders}
 		</if>
 		)
 	</insert>
@@ -41,6 +53,13 @@
 		<if test="contentHtml!=null and contentHtml!=''">
 			,contentHtml=#{contentHtml}
 		</if>
+		<if test="title!=null and title!=''">
+			,title=#{title}
+		</if>
+		<if test="orders!=null">
+			,orders=#{orders}
+		</if>
+		 
 			where 1=1 and id=#{id}
 	</update>
 	<select id="about.selectOne"
