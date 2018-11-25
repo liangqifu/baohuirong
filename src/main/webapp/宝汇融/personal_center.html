@@ -1,0 +1,143 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>登录界面</title>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+</head>
+
+<body>
+	 <div class="kuan_heaaer clearfix">
+		 <div style="padding-top: 20px;" class="kuan_heaaer_div">
+	    	<a href="index.html" class="logo">
+	    		<img src="images/logo.jpg" alt="" />
+	    	</a>
+		 </div>
+	</div>
+	
+     <div class="center_box">
+	      <div class="center_t">
+			  <a class="center_name">张三</a>
+			   <a class="center_exit">退出</a>	  
+		  </div>		 
+		
+	</div>
+	
+     <div class="center_cb">	
+	    <div class="center_con">		
+		
+	     <div class="om-side-nav om-qy-side fl">
+    		<ul class="om-nav">
+    			<li class="gd-first"><div><span class="iconfont icon-gongdan"></span>需求管理</div>
+    				<a id="custCenter_index" href="" class="current">我的需求工单<i>&gt;</i></a>
+    			</li>
+    			<li><div><span class="iconfont icon-zhanghu"></span>账户管理</div>
+    				<a id="custCenter_baseinfo" href="">企业基本信息<i>&gt;</i></a>
+    				<a id="custCenter_updatePassword" href="">修改密码<i>&gt;</i></a>
+    				<a id="custCenter_bindPhone" href="">绑定手机<i>&gt;</i></a>
+    			</li>
+    			<li><div><span class="iconfont icon-random_1"></span>其他管理</div>
+    				<a href="javascript:void(0);">企业数据填报<i>&gt;</i></a>
+    				
+    			</li>        			
+    		</ul>
+    	</div>
+		
+		
+		<div class="om-r-container fr">
+			<div class="om-r-search">
+				<div class="om-form-box">
+					<label>需求类型：</label><select id="reqTypeSelect" name="reqType" class="j-slt j-slt-middle">
+						<option value="">请选择</option>
+						
+							<option value="1">产品需求</option>
+						
+							<option value="2">技术需求</option>
+						
+							<option value="3">认证需求</option>
+						
+							<option value="4">融资需求</option>
+						
+							<option value="5">其它需求</option>
+						</select><label class="ml50">需求产品：</label><input type="text" name="prodName" id="prod" class="j-ipt j-ipt-middle" placeholder="服务/技术/资源等" value=""><label class="ml50">服务机构：</label><input type="text" name="jgName" id="jg" class="j-ipt j-ipt-middle" value="">
+				</div>
+				<div class="om-btn-box">
+					<button onclick="doSubmit();" class="j-btn j-btn-middle">提交查询</button>
+					<button onclick="doQueryReset();" class="j-btn j-btn-middle">重置查询</button>
+				</div>
+			</div>
+			<div class="om-r-content">
+				<div class="om-r-title">
+					<a href="javascript:void(0);" id="selectStatus_0" onclick="doStatus(0);" class="gd-first current">所有工单</a><b>|</b>
+					<a href="javascript:void(0);" id="selectStatus_1" onclick="doStatus(1);">待受理（<span id="wsl">0</span>）</a><b>|</b>
+					<a href="javascript:void(0);" id="selectStatus_2" onclick="doStatus(2);">受理中（<span id="slz">0</span>）</a><b>|</b>
+					<a href="javascript:void(0);" id="selectStatus_3" onclick="doStatus(3);">服务中（<span id="fwz">0</span>）</a><b>|</b> 
+					<a href="javascript:void(0);" id="selectStatus_4" onclick="doStatus(4);">已完成</a><b>|</b>
+					<a href="javascript:void(0);" id="selectStatus_5" onclick="doStatus(5);">已取消</a><b>|</b>
+				</div>
+				<input type="hidden" name="reqStatus" value="" id="index_status">
+				
+				<!--分页模块-->
+				<div class="om-pagition">
+					<div class="paging">
+						<div class="nav-box">
+							
+							<input type="hidden" name="page" id="pageId" value="1">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+	</div>
+	   
+	</div>   
+	
+	
+	
+	<div class="footer">
+		<div class="footer_com clearfix">
+			<ul class="di_nav">
+				<li>
+					<p class="tit">关于我们</p>
+					<a href="about.html">宝汇融介绍</a>
+					<a href="about.html">组织机构 </a>
+					<a href="about.html">发展规划</a>
+					<a href="contact.html">联系我们</a>
+					
+				</li>
+				
+				
+				<li>
+					<p class="tit">联系我们</p>
+					<p>地址:广东省珠海市......</p> 
+					<p>电话:0756-8......</p>
+					<p>邮箱:123456789@163.com	</p>
+					<p>网址:www.baidu.com</p>
+				</li>
+			</ul>
+			<div class="er_right">
+				<div class="er">
+					<div class="pic">
+						<img src="images/erwei.png" alt="" class="vcenter">
+						<i></i>
+					</div>
+					<div class="text">
+						<span>微信公众平台</span>
+						<span>关注宝汇融</span>
+					</div>
+				</div>
+				
+			</div>
+			
+		</div>
+		<div class="copy clearfix">
+			<div class="copy_cc">
+				<span> Copyright(c)2018版权所有 </span> 
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

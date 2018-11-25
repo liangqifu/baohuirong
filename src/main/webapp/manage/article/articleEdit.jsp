@@ -59,6 +59,11 @@
                                                      id="keywords"/></td>
             </tr>
             <tr>
+                <th style="text-align: right;">备注</th>
+                <td style="text-align: left;"><input type="text" size="80" value="${e.remark}" name="remark"
+                                                     id="remark"/></td>
+            </tr>
+            <tr>
                 <th style="text-align: right;">状态</th>
                 <td style="text-align: left;">
                     <select name="status">
@@ -68,6 +73,7 @@
                     </select>
                 </td>
             </tr>
+            
             <tr>
                 <th style="text-align: right;">文章描述</th>
                 <td style="text-align: left;">
@@ -75,6 +81,7 @@
                               rows="4">${e.description}</textarea>
                 </td>
             </tr>
+            
             <tr>
                 <th style="text-align: right;">文章内容</th>
                 <td style="text-align: left;">

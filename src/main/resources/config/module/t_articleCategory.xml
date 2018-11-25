@@ -36,6 +36,9 @@
         <if test="parentid!=null">
             ,parentid
         </if>
+        <if test="url!=null and url!=''">
+            ,url
+        </if>
         
 
         ) values (
@@ -53,7 +56,9 @@
         <if test="parentid!=null">
             ,#{parentid}
         </if>
-
+        <if test="url!=null and url!=''">
+            ,#{url}
+        </if>
         )
     </insert>
     <update id="articlecategory.update" parameterType="com.enterprise.entity.ArticleCategory">
@@ -68,6 +73,9 @@
         </if>
         <if test="description!=null and description!=''">
             ,description=#{description}
+        </if>
+        <if test="url!=null and url!=''">
+            ,url=#{url}
         </if>
         where id = #{id}
     </update>

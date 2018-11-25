@@ -147,6 +147,13 @@
                             </td>
                         </tr>
                         <tr>
+			                <th style="text-align: right;">二维码</th>
+			                <td style="text-align: left;">
+			                    <input type="text"  size="40" id="qrcode" name="qrcode" value="${e.qrcode}" />
+			                    <input type="button" name="qrcodeFile" value="选择图片" class="btn btn-primary" style="padding: 0px 12px;margin-top: -5px;"/>
+			                </td>
+			            </tr>
+                        <tr>
                             <td style="text-align: right;">站长统计代码</td>
                             <td style="text-align: left;">
                                 <textarea id="statisticsCode" class="textArea" cols="100" rows="8"
@@ -294,6 +301,17 @@
                     imageUrl: K('#logo').val(),
                     clickFn: function (url) {
                         K('#logo').val(url);
+                        editor.hideDialog();
+                    }
+                });
+            });
+        });
+        K('input[name=qrcodeFile]').click(function() {
+            editor.loadPlugin('image', function() {
+                editor.plugin.imageDialog({
+                    imageUrl : K('#qrcode').val(),
+                    clickFn : function(url) {
+                        K('#qrcode').val(url);
                         editor.hideDialog();
                     }
                 });

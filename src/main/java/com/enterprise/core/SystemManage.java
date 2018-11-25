@@ -8,6 +8,7 @@ import com.enterprise.entity.Contact;
 import com.enterprise.entity.FriendLinks;
 import com.enterprise.entity.IndexImg;
 import com.enterprise.entity.Messages;
+import com.enterprise.entity.Navigation;
 import com.enterprise.entity.Recruitment;
 import com.enterprise.entity.Service;
 import com.enterprise.entity.SystemSetting;
@@ -110,9 +111,13 @@ public class SystemManage {
     public List<ArticleCategory> getArticleCategory(){
         return getCacheObject("articleCategory");
     }
+    
     public void setArticleCategory(List<ArticleCategory> articleCategory){
         putCacheObject("articleCategory",(Serializable)(articleCategory));
     }
+    
+    
+    
     //联系我们
     public List<Contact> getContact(){
         return getCacheObject("contacts");
@@ -137,6 +142,24 @@ public class SystemManage {
         putCacheObject("services",(Serializable)(servies));
     }
 
+    public List<Navigation> getNavigations(){
+    	return getCacheObject("navigations");
+    }
+    
+    public Navigation getNavigation(String id){
+    	List<Navigation> navigations = getCacheObject("navigations");
+    	for (Navigation navigation : navigations) {
+			if(String.valueOf(navigation.getId()).equals(id)) {
+				return navigation;
+			}
+		}
+    	return new Navigation();
+    }
+    
+    public void setNavigations(List<Navigation> navigations){
+        putCacheObject("navigations",(Serializable)(navigations));
+    }
+    
 
 
 }

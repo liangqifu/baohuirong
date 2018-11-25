@@ -1,0 +1,116 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>登录界面</title>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+</head>
+
+<body>
+	 <div class="kuan_heaaer clearfix">
+		 <div style="padding-top: 20px;" class="kuan_heaaer_div">
+	    	<a href="index.html" class="logo">
+	    		<img src="images/logo.jpg" alt="" />
+	    	</a>
+		 </div>
+	</div>
+	
+	<div class="regist-wrap">
+      <div class="w_box">
+        <div class="title">
+          <span class="step"><i class="iconfont">1</i>填写账户信息</span>
+          <span class="step next"><i class="iconfont icon-right_2"></i>注册成功</span>
+        </div>
+        <div class="list">
+          <ul>
+          	<li class="item">
+          	  <label class="label">手机号码</label><input class="ipt" type="text" name="LOGINNAME" placeholder="请输入手机号码">
+          	  <span id="loginname_msg" class="hint"></span>
+          	</li>
+          	<li class="item">
+              <label class="label">验证码</label><input class="ipt" type="text" name="randNum" placeholder="请输入验证码">
+              <span id="randnum_msg" class="hint"></span>
+              <img id="randImg" class="code" src="/web/randimage" alt="点我更新验证码" width="85" height="38">
+            </li>
+            <li class="item">
+              <label class="label">手机验证码</label><input class="ipt" type="text" name="CHECKRAND" placeholder="请输入手机验证码">
+              <span id="checkrand_msg" class="hint"></span>
+              <a class="tel-code" id="getValCodeBut" href="javascript:void(0);" onclick="sendShortMessage(this, document.forms[0]);">获取手机验证码</a>
+            </li>
+            <li id="jgcust_name" class="item">
+              <label id="jgcustname_label" class="label">企业名称</label><input class="ipt" type="text" name="CUSTNAME" placeholder="请输入营业执照上的公司名称">
+              <span id="custname_msg" class="hint"></span>
+            </li>
+            <li class="item">
+              <label class="label">登录密码</label><input class="ipt" type="password" name="PASSWD" placeholder="建议至少使用两种字符组合">
+              <span id="passwd_msg" class="hint"></span>
+            </li>
+            <li class="item">
+              <label class="label">确认密码</label><input class="ipt" type="password" name="CONFIRMPASSWD" placeholder="请再次输入密码">
+              <span id="confirmpasswd_msg" class="hint"></span>
+            </li>
+            <li class="item">
+              <label class="label"></label><input class="check" type="checkbox" name="CHECKBOX">
+              <span class="agree">阅读并同意<a href="javascript:void(0);" onclick="openpop(4);">《平台用户注册协议》</a></span>
+              <span id="checkbox_msg" class="hint"></span>
+            </li>
+            <li class="item">
+              <label class="label"></label><input class="submit" type="button" onclick="Reg();" value="立即注册">
+            </li>
+            <li class="item have-account">
+              <label class="label" for=""></label>
+              <span class="go">已有账号, <a id="loginLinkid" href="/web/work/qy/index">请登录</a></span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+	
+	
+	
+	
+	<div class="footer">
+		<div class="footer_com clearfix">
+			<ul class="di_nav">
+				<li>
+					<p class="tit">关于我们</p>
+					<a href="about.html">宝汇融介绍</a>
+					<a href="about.html">组织机构 </a>
+					<a href="about.html">发展规划</a>
+					<a href="contact.html">联系我们</a>
+					
+				</li>
+				
+				
+				<li>
+					<p class="tit">联系我们</p>
+					<p>地址:广东省珠海市......</p> 
+					<p>电话:0756-8......</p>
+					<p>邮箱:123456789@163.com	</p>
+					<p>网址:www.baidu.com</p>
+				</li>
+			</ul>
+			<div class="er_right">
+				<div class="er">
+					<div class="pic">
+						<img src="images/erwei.png" alt="" class="vcenter">
+						<i></i>
+					</div>
+					<div class="text">
+						<span>微信公众平台</span>
+						<span>关注宝汇融</span>
+					</div>
+				</div>
+				
+			</div>
+			
+		</div>
+		<div class="copy clearfix">
+			<div class="copy_cc">
+				<span> Copyright(c)2018版权所有 </span> 
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

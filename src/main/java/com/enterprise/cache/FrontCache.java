@@ -129,6 +129,7 @@ public class FrontCache implements ServletContextAware {
 		List<ArticleCategory> articleCategoryLIst = new ArrayList<ArticleCategory>();
 		articleCategoryLIst = articleCategoryService.selectList(new ArticleCategory());
 		systemManage.setArticleCategory(articleCategoryLIst);
+		loadNavigation();
 	}
 
 	/**
@@ -159,6 +160,42 @@ public class FrontCache implements ServletContextAware {
 		services = serviceService.selectList(new Service());
 		systemManage.setService(services);
 	}
-
+	
+	/**
+	 * 加载导航栏
+	 * @throws Exception
+     */
+	public void loadNavigation() throws Exception{
+		List<Navigation> list = new ArrayList<Navigation>();
+		List<ArticleCategory> articleCategories = articleCategoryService.selectList(new ArticleCategory(0));
+		Navigation navigation = null;
+		for (ArticleCategory articleCategory : articleCategories) {
+			navigation = new Navigation();
+			navigation.setId(String.valueOf(articleCategory.getId()));
+			navigation.setName(articleCategory.getCatename());
+			navigation.setUrl(articleCategory.getUrl());
+			setNavigationChildren(navigation);
+			list.add(navigation);
+		}
+		systemManage.setNavigations(list);
+	}
+	
+	private void setNavigationChildren(Navigation navigation) {
+		List<Navigation> children = new ArrayList<Navigation>();
+		List<ArticleCategory> articleCategories = articleCategoryService.selectList(new ArticleCategory(Integer.valueOf(navigation.getId())));
+		Navigation child = null;
+		for (ArticleCategory articleCategory : articleCategories) {
+			child = new Navigation();
+			child.setId(String.valueOf(articleCategory.getId()));
+			child.setName(articleCategory.getCatename());
+			child.setUrl(articleCategory.getUrl());
+			int count = articleCategoryService.selectCount(new ArticleCategory(Integer.valueOf(child.getId())));
+			if (count > 0) {
+				setNavigationChildren(child);
+			}
+			children.add(child);
+		}
+		navigation.setChildren(children);
+	}
 
 }

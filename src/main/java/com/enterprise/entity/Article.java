@@ -20,6 +20,7 @@ public class Article extends PageModel implements Serializable{
     private String description; //描述
     private String status;      //状态
     private String catename;    //分类名
+    private String remark; //备注
 
     @Override
     public void clean() {
@@ -35,6 +36,7 @@ public class Article extends PageModel implements Serializable{
         description = null;
         status = null;
         catename = null;
+        remark = null;
     }
 
     public String getTitle() {
@@ -142,4 +144,16 @@ public class Article extends PageModel implements Serializable{
                 ", catename='" + catename + '\'' +
                 '}';
     }
+
+	
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+	
+	
 }

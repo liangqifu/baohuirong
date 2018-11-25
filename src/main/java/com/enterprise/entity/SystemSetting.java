@@ -30,6 +30,7 @@ public class SystemSetting extends PageModel implements Serializable {
     private String imageRootPath;//图片根目录
     private String fax;            //传真
     private String phone;        //手机
+    private String qrcode;       //二维码
     private String serverInfo;    //服务器吗名称
     private String serverVersion;//服务器版本
     private String javaVersion;        //java版本
@@ -69,6 +70,7 @@ public class SystemSetting extends PageModel implements Serializable {
         osName = null;
         osVersion = null;
         mysqlVersion = null;
+        qrcode = null;
     }
 
 
@@ -336,4 +338,16 @@ public class SystemSetting extends PageModel implements Serializable {
     public void setMysqlVersion(String mysqlVersion) {
         this.mysqlVersion = mysqlVersion;
     }
+
+
+	public String getQrcode() {
+		return qrcode;
+	}
+
+
+	public void setQrcode(String qrcode) {
+		this.qrcode = qrcode;
+	}
+    
+    
 }

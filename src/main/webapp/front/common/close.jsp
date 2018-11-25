@@ -1,6 +1,5 @@
 
-<%@ page language="java" contentType="text/html; UTF-8"
-         pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <body style="background: #C7E8FB;">
 <div style="width: 900px;height: 100%;margin: auto;margin-top: 300px;">

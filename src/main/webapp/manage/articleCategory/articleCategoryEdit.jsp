@@ -71,6 +71,10 @@
                 <td style="text-align: left;"><input type="text" size="40" value="${e.code}" name="code" id="code" data-rule="编码:required;code;length[1~45];remote[unique?id=${e.id}, parentid:parentid]"/></td>
             </tr>
             <tr>
+                <th style="text-align: right; width: 20% ;white-space: nowrap;" >url</th>
+                <td style="text-align: left;"><input type="text" size="40" value="${e.url}" name="url" id="url" /></td>
+            </tr>
+            <tr>
                 <th style="text-align: right;  width: 20% ">排序</th>
                 <td style="text-align: left;"><input type="text" size="40" value="${e.orders}" name="orders"
                                                      data-rule="排序:required;integer[+];"

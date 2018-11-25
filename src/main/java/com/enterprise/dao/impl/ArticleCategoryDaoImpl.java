@@ -59,4 +59,9 @@ public class ArticleCategoryDaoImpl implements ArticleCategoryDao {
     public ArticleCategory selectById(int id) {
         return (ArticleCategory) dao.selectOne("articlecategory.selectById",id);
     }
+
+	@Override
+	public int selectCount(ArticleCategory e) {
+		return dao.getCount("articlecategory.selectPageCount", e);
+	}
 }

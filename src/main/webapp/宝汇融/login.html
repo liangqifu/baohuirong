@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>登录界面</title>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+</head>
+
+<body>
+	 <div class="kuan_heaaer clearfix">
+		 <div style="padding-top: 20px;" class="kuan_heaaer_div">
+	    	<a href="index.html" class="logo">
+	    		<img src="images/logo.jpg" alt="" />
+	    	</a>
+		 </div>
+	</div>
+	<div class="login-bg">
+			<div class="login-wrapper">
+				<!--标题-->
+				<h1>账号登录</h1>
+				<div class="login-box">
+					<!--表单-->
+					<div class="row err">
+						<div class="ipt-box">
+							<i class="icon icon-user"></i> <input id="loginname_id" type="text" name="loginname" class="ipt" placeholder="手机号码">
+						</div>
+						<div class="warn"></div>
+					</div>
+					<div class="row">
+						<div class="ipt-box">
+							<i class="icon icon-pwd"></i> <input id="password_id" type="password" name="password" class="ipt" placeholder="登录密码">
+							<div class="warn"></div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="ipt-box">
+							<i class="icon icon-code"></i> <input type="text" id="code_id" name="randNum" class="ipt" placeholder="验证码"> <img class="code" src="/web/randimage" id="randId" alt="点我更新验证码" width="85" height="38">
+						</div>
+						<div class="warn"></div>
+					</div>
+					<div class="row">
+						<button type="button" onclick="javascript:saveCheck();" class="btn-login">登 录</button>
+					</div>
+					<div class="login-b">
+						<span>还没账户，</span> <a class="reg-link" href="regpage.html">免费注册</a> <a class="pwd-link" href="/web/front/RegPage/userConfirm">忘记密码</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	
+	  <div style="background: #fff;color: #000;" class="footer">
+		<div class="footer_com clearfix">
+			<ul style="color: #000;"  class="di_nav">
+				<li>
+					<p style="color: #000;"  class="tit">关于我们</p>
+					<a href="about.html">宝汇融介绍</a>
+					<a href="about.html">组织机构 </a>
+					<a href="about.html">发展规划</a>
+					<a href="contact.html">联系我们</a>
+					
+				</li>
+				
+				
+				<li>
+					<p style="color: #000;"  class="tit">联系我们</p>
+					<p>地址:广东省珠海市......</p> 
+					<p>电话:0756-8......</p>
+					<p>邮箱:123456789@163.com	</p>
+					<p>网址:www.baidu.com</p>
+				</li>
+			</ul>
+			<div class="er_right">
+				<div class="er">
+					<div class="pic">
+						<img src="images/erwei.png" alt="" class="vcenter">
+						<i></i>
+					</div>
+					<div style="color: #000;"  class="text">
+						<span>微信公众平台</span>
+						<span>关注宝汇融</span>
+					</div>
+				</div>
+				
+			</div>
+			
+		</div>
+		<div style="color: #000;text-align: center;"  class="copy clearfix">
+			<div class="copy_cc">
+				<span> Copyright(c)2018 宝汇融|版权所有 </span> 
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

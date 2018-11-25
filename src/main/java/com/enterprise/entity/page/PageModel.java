@@ -16,6 +16,8 @@ public class PageModel implements CleanBean{
 	protected String pagerUrl;	//分页utl
 	private int recordsTotal;	//记录总数
 	private int recordsFiltered;	//记录过滤
+	private String orderBy;
+	private String sort;
 
 	
 
@@ -136,7 +138,35 @@ public class PageModel implements CleanBean{
 		offset = 0;
 		recordsTotal = 0;
 		id = 0;
+		orderBy = null;
+		sort = null;
 	}
+
+
+
+	public String getOrderBy() {
+		return orderBy;
+	}
+
+
+
+	public void setOrderBy(String orderBy) {
+		this.orderBy = orderBy;
+	}
+
+
+
+	public String getSort() {
+		return sort;
+	}
+
+
+
+	public void setSort(String sort) {
+		this.sort = sort;
+	}
+	
+	
 
 
 }

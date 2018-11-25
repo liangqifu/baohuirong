@@ -43,15 +43,12 @@ var setting = {
                 zTree.expandNode(treeNode);
             },
 			onMouseDown: function (event, treeId, treeNode) {
-                var url = "toAddOrUpdate?id="+treeNode.id;
-                if(true){
-                    $("#iframeMenuEdit").attr("src",url);
-                    return;
-                }
-                //alert(url);
-                $("#dfsfsf").val(treeNode.id);
-                document.form1.action = url;
-                document.form1.submit();
+				if(treeNode){
+					var url = "toAddOrUpdate?id="+treeNode.id;
+					$("#iframeMenuEdit").attr("src",url);
+	                $("#dfsfsf").val(treeNode.id);
+				}
+                
             }
 		},
         data:{

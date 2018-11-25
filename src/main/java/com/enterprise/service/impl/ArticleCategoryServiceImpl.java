@@ -17,4 +17,9 @@ public class ArticleCategoryServiceImpl extends ServersManage<ArticleCategory,Ar
     public void setDao(ArticleCategoryDao dao) {
         this.dao = dao;
     }
+
+	@Override
+	public int selectCount(ArticleCategory e) {
+		return this.dao.selectCount(e);
+	}
 }
