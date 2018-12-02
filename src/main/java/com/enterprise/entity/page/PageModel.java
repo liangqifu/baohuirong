@@ -10,7 +10,7 @@ public class PageModel implements CleanBean{
 	private int id;	//id
 	private int total;	//数据总数
 	private List list = new ArrayList();//查询到集合
-	private int pageSize = 20;	//每页数据  20
+	private int pageSize = 10;	//每页数据  20
 	private int offset;			//页数
 	private int pagerSize;		// 总页数
 	protected String pagerUrl;	//分页utl

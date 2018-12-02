@@ -4,6 +4,7 @@ import com.enterprise.entity.*;
 import com.enterprise.entity.page.PageModel;
 import com.enterprise.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.CollectionUtils;
 
 import com.enterprise.core.SystemManage;
 import org.springframework.web.context.ServletContextAware;
@@ -156,9 +157,14 @@ public class FrontCache implements ServletContextAware {
 	 * @throws Exception
      */
 	public void loadService() throws Exception{
-		List<Service> services = new ArrayList<Service>();
-		services = serviceService.selectList(new Service());
-		systemManage.setService(services);
+		Service e = new Service();
+		e.setOffset(0);
+		e.setPageSize(5);
+		e.setOrderBy("orders");
+		e.setSort("ASC");
+		e.setStatus("y");
+		PageModel pageModel = serviceService.selectPageList(e);
+		systemManage.setService(pageModel.getList());
 	}
 	
 	/**
@@ -174,6 +180,7 @@ public class FrontCache implements ServletContextAware {
 			navigation.setId(String.valueOf(articleCategory.getId()));
 			navigation.setName(articleCategory.getCatename());
 			navigation.setUrl(articleCategory.getUrl());
+			navigation.setCode(articleCategory.getCode());
 			setNavigationChildren(navigation);
 			list.add(navigation);
 		}
@@ -189,11 +196,15 @@ public class FrontCache implements ServletContextAware {
 			child.setId(String.valueOf(articleCategory.getId()));
 			child.setName(articleCategory.getCatename());
 			child.setUrl(articleCategory.getUrl());
+			child.setCode(articleCategory.getCode());
 			int count = articleCategoryService.selectCount(new ArticleCategory(Integer.valueOf(child.getId())));
 			if (count > 0) {
 				setNavigationChildren(child);
 			}
 			children.add(child);
+		}
+		if(!CollectionUtils.isEmpty(children)) {
+			navigation.setFirstChild(children.get(0));
 		}
 		navigation.setChildren(children);
 	}

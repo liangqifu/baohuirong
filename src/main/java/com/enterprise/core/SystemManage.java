@@ -134,7 +134,7 @@ public class SystemManage {
         putCacheObject("abouts",(Serializable)(abouts));
     }
 
-    //服务领域
+    //相关新闻
     public List<Service> getService(){
         return getCacheObject("services");
     }

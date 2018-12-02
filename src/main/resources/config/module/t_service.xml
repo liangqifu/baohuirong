@@ -8,13 +8,34 @@
         <if test="title!=null and title!=''">
             and title like "%"#{title}"%"
         </if>
-        order by id DESC
+        <if test="status!=null and status!=''">
+            and status=#{status}
+        </if>
+        <choose>
+           <when test="orderBy !=null and orderBy !=''">
+                 order by #{orderBy}  
+                 <choose>
+                     <when test="sort !=null and sort !='' ">
+                         #{sort}
+                     </when>
+                     <otherwise>
+                         DESC
+                     </otherwise>
+                 </choose>
+           </when>
+           <otherwise>
+              order by id DESC
+           </otherwise>
+        </choose>
         limit #{offset},#{pageSize}
     </select>
     <select id="service.selectPageCount" parameterType="com.enterprise.entity.Service" resultType="java.lang.Integer">
         select count(*) from t_service where 1=1
         <if test="title!=null and title!=''">
             and title like "%"#{title}"%"
+        </if>
+         <if test="status!=null and status!=''">
+            and status=#{status}
         </if>
     </select>
     <insert id="service.insert" parameterType="com.enterprise.entity.Service" useGeneratedKeys="true" keyProperty="id">

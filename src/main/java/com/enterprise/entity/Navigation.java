@@ -1,11 +1,18 @@
 package com.enterprise.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Navigation {
+public class Navigation implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String id;
 	private String name;
 	private String url;
+	private String code;
+	private Navigation firstChild;
 	private List<Navigation> children;
     private List<Article> articles;
     private List<Article> articles2;
@@ -55,6 +62,22 @@ public class Navigation {
 
 	public void setArticles2(List<Article> articles2) {
 		this.articles2 = articles2;
+	}
+
+	public Navigation getFirstChild() {
+		return firstChild;
+	}
+
+	public void setFirstChild(Navigation firstChild) {
+		this.firstChild = firstChild;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
 	}
 	
 

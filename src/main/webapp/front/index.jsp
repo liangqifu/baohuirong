@@ -57,7 +57,8 @@
 			          <div class="news_title">${item.name }</div>
 				        <ul>
 				             <c:forEach var="article"  items="${item.articles}">
-				                   <li><a href="<%=path %>/#?id=${article.id}">${article.title }<span class="news_time">[ ${article.createtime } ]</span></a></li>
+				                   <fmt:parseDate value="${article.createtime }" pattern="yyyy-MM-dd" var="myDate"/>
+				                   <li><a href="<%=path %>/#?id=${article.id}">${article.title }<span class="news_time">[ <fmt:formatDate value="${myDate}" pattern="yyyy-MM-dd" /> ]</span></a></li>
 				             </c:forEach>
 				        </ul>
 				    </div>

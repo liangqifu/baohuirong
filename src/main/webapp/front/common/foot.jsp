@@ -1,14 +1,15 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
      <div class="footer">
 		<div class="footer_com clearfix">
 			<ul class="di_nav">
 				<li>
 					<p class="tit">关于我们</p>
-					<a href="about.html">宝汇融介绍</a>
-					<a href="about.html">组织机构 </a>
-					<a href="about.html">发展规划</a>
-					<a href="contact.html">联系我们</a>
+					 <c:forEach var="item"  varStatus="status"  items="<%=SystemManage.getInstance().getAbout()%>">
+						<a href="<%=path %>/about?id=${item.id }">${item.title }</a>
+					</c:forEach>
+					<a href="<%=path %>/about?id=999">联系我们</a>
 					
 				</li>
 				

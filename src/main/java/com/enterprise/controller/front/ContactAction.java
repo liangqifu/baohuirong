@@ -12,7 +12,7 @@ public class ContactAction{
 
     @RequestMapping("contact")
     public String contact() {
-        return "/front/contact/contact";
+        return "/front/contact";
     }
 
 }

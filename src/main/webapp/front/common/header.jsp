@@ -7,20 +7,20 @@
 		</div>	  
 	    <div class="kuan_heaaer clearfix">
 		 <div class="kuan_heaaer_div">
-	    	<a href="<%=path %>/" class="logo">
+	    	<a href="<%=path %>/index" class="logo">
 	    		<img src="<%=SystemManage.getInstance().getSystemSetting().getImageRootPath() %><%=SystemManage.getInstance().getSystemSetting().getLogo() %>" alt="" />
 	    	</a>
 	    	<div class="nav_div">
 	    		<ul class="nav_ul">                                                                                                      
 	    			<li class="active">	
-						<a href="<%=path %>/"><span>网站首页</span></a>
+						<a href="<%=path %>/index"><span>网站首页</span></a>
 	    			</li>
 	    			<c:forEach var="item" items="<%=SystemManage.getInstance().getNavigations()%>">
 		    			<li>
-		    				<a href="<%=path %>/${item.url}?id=${item.id}"><span>${item.name}</span></a>
+		    				<a href="<%=path %>/newsList?parentCategoryId=${item.id}&categoryId=${item.firstChild.id}"><span>${item.name}</span></a>
 		    				<div class="erji">
 		    				   <c:forEach var="child" items="${item.children}">
-		    					    <a href="<%=path %>/${child.url}?id=${child.id}">${child.name}</a>
+		    					    <a href="<%=path %>/newsList?parentCategoryId=${item.id}&categoryId=${child.id}">${child.name}</a>
 							   </c:forEach>
 		    				</div>
 		    			</li>

@@ -68,7 +68,7 @@
 		select * from t_about where 1=1 limit 0,1
 	</select>
 	<select id="about.selectList" parameterType="com.enterprise.entity.About" resultType="com.enterprise.entity.About">
-		select * from t_about where 1=1
+		select * from t_about where 1=1  order by orders ASC
 	</select>
 	<select id="about.selectById" parameterType="int" resultType="com.enterprise.entity.About">
 	 select * from t_about  where 1=1 and id=#{id}

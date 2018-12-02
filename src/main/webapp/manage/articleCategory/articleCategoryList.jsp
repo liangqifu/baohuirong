@@ -59,7 +59,6 @@
             <th width="300">分类名称</th>
             <th>编码</th>
             <th>分类描述</th>
-            <th>url</th>
             <th width="100">排序</th>
             <th width="200">操作</th>
         </tr>
@@ -68,7 +67,6 @@
                 <td>${item.catename}</td>
                 <td>${item.code}</td>
                 <td>${item.description}</td>
-                <td>${item.url}</td>
                 <td>${item.orders}</td>
                 <td><a href="toEdit?id=${item.id}">编辑</a> | <a href="delete?id=${item.id}&parentid=${item.parentid}">删除</a></td>
             </tr>
